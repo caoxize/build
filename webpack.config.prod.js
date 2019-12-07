@@ -7,7 +7,7 @@ const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plug
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 const BASE_CONFIG = require('./webpack.config.base')
-const { ENTRY } = require('./config')
+const { ENTRY, PROJECT_PATH } = require('./config')
 
 module.exports = merge(BASE_CONFIG, {
   mode: 'production',
@@ -30,6 +30,7 @@ module.exports = merge(BASE_CONFIG, {
           {
             loader: 'css-loader',
             options: {
+              modules: true,
               importLoaders: 1
             }
           },
@@ -60,7 +61,7 @@ module.exports = merge(BASE_CONFIG, {
       cssProcessor: cssnano
     }),
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, 'public/index.html'),
+      template: path.join(PROJECT_PATH, 'public/index.html'),
       filename: 'index.html',
       chunks: ['index'],
       inject: true,
