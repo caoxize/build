@@ -90,5 +90,5 @@ module.exports = merge(BASE_CONFIG, {
     // publicPath: '/assets/js/',
     contentBase: './dist/'
   },
-  devtool: 'cheap-source-map'
+  devtool: 'cheap-module-eval-source-map'
 })
