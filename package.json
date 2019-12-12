@@ -1,6 +1,6 @@
 {
   "name": "react-webpack-build",
-  "version": "0.0.1-beta4",
+  "version": "0.0.1-beta5",
   "description": "react webpack build",
   "main": "index.js",
   "scripts": {

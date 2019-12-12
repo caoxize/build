@@ -7,7 +7,7 @@ const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plug
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 const BASE_CONFIG = require('./webpack.config.base')
-const { ENTRY, PROJECT_PATH } = require('./config')
+const { ENTRY, PROJECT_PATH, CSS_MODULES } = require('./config')
 
 module.exports = merge(BASE_CONFIG, {
   mode: 'production',
@@ -30,7 +30,12 @@ module.exports = merge(BASE_CONFIG, {
           {
             loader: 'css-loader',
             options: {
-              modules: true,
+              modules: CSS_MODULES
+                ? {
+                    mode: 'local',
+                    localIdentName: '[name]__[local]--[hash:base64:5]'
+                  }
+                : false,
               importLoaders: 1
             }
           },
@@ -48,6 +53,10 @@ module.exports = merge(BASE_CONFIG, {
             }
           }
         ]
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/,
+        use: 'file-loader'
       }
     ]
   },
@@ -60,19 +69,21 @@ module.exports = merge(BASE_CONFIG, {
       assetNameRegExp: /\.css$/g,
       cssProcessor: cssnano
     }),
-    new HtmlWebpackPlugin({
-      template: path.join(PROJECT_PATH, 'public/index.html'),
-      filename: 'index.html',
-      chunks: ['index'],
-      inject: true,
-      minify: {
-        html5: true,
-        collapseWhitespace: true,
-        preserveLineBreaks: false,
-        minifyCSS: true,
-        minifyJS: true,
-        removeComments: false
-      }
+    ...Object.keys(ENTRY).map(item => {
+      return new HtmlWebpackPlugin({
+        template: path.join(PROJECT_PATH, `public/${item}.html`),
+        filename: `${item}.html`,
+        chunks: [item],
+        inject: true,
+        minify: {
+          html5: true,
+          collapseWhitespace: true,
+          preserveLineBreaks: false,
+          minifyCSS: true,
+          minifyJS: true,
+          removeComments: false
+        }
+      })
     })
   ]
 })

@@ -10,6 +10,7 @@ function App() {
 
   return (
     <div>
+      {/* <p className={styles.test}>You clicked {count} times</p> */}
       <p className="test">You clicked {count} times</p>
       <button type="button" onClick={() => setCount(count + 1)}>
         Click me

@@ -82,19 +82,21 @@ module.exports = merge(BASE_CONFIG, {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new HtmlWebpackPlugin({
-      template: path.join(PROJECT_PATH, 'public/index.html'),
-      filename: 'index.html',
-      chunks: ['index'],
-      inject: true,
-      minify: {
-        html5: true,
-        collapseWhitespace: true,
-        preserveLineBreaks: false,
-        minifyCSS: true,
-        minifyJS: true,
-        removeComments: false
-      }
+    ...Object.keys(ENTRY).map(item => {
+      return new HtmlWebpackPlugin({
+        template: path.join(PROJECT_PATH, `public/${item}.html`),
+        filename: `${item}.html`,
+        chunks: [item],
+        inject: true,
+        minify: {
+          html5: true,
+          collapseWhitespace: true,
+          preserveLineBreaks: false,
+          minifyCSS: true,
+          minifyJS: true,
+          removeComments: false
+        }
+      })
     })
   ],
   devServer: {

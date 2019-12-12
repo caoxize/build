@@ -4,6 +4,7 @@ webpack 打包工具
 
 \$ npm install build
 
-webpack 升级 4.x
-
-\$ npm install webpack webpack-cli
+package.json:
+配置入口
+ENTRY: {},
+CSS_MODULES: "local" // "local", "global", false
