@@ -1,18 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 
 import './index.scss'
 
-class App extends React.Component {
-  constructor(props) {
-    super(props)
+// import styles from './index.scss'
 
-    this.state = {}
-  }
+function App() {
+  const [count, setCount] = useState(0)
 
-  render() {
-    return <div>React</div>
-  }
+  return (
+    <div>
+      <p className="test">You clicked {count} times</p>
+      <button type="button" onClick={() => setCount(count + 1)}>
+        Click me
+      </button>
+    </div>
+  )
 }
 
 ReactDOM.render(<App />, document.getElementById('app'))

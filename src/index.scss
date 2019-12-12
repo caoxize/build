@@ -1,4 +1,21 @@
+@font-face {
+  font-family: 'NUMBER';
+  src: url(./font/number_font.ttf) format('truetype');
+}
+
 body {
   background: greenyellow;
   display: flex;
 }
+
+.test {
+  font-family: 'NUMBER';
+}
+
+/*
+:global {
+  .test {
+    font-family: 'NUMBER';
+  }
+}
+*/

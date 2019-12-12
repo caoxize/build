@@ -115,6 +115,7 @@
       "selfClosing": "after-props"
     }],
     "react/jsx-filename-extension": 0,
+    "react/jsx-one-expression-per-line": 0,
     "react/jsx-wrap-multilines": [2, {
       "prop": "ignore"
     }],

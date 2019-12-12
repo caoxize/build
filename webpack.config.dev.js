@@ -1,5 +1,3 @@
-'use strict'
-
 const path = require('path')
 const webpack = require('webpack')
 const merge = require('webpack-merge')
@@ -7,7 +5,16 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 const BASE_CONFIG = require('./webpack.config.base')
 
-const { ENTRY, PROJECT_PATH } = require('./config')
+const {
+  ENTRY,
+  PROJECT_PATH,
+  DEV_HOST,
+  DEV_PORT,
+  CSS_MODULES
+} = require('./config')
+
+console.log(CSS_MODULES)
+console.log(CSS_MODULES ? 'true' : 'false')
 
 module.exports = merge(BASE_CONFIG, {
   mode: 'development',
@@ -43,10 +50,12 @@ module.exports = merge(BASE_CONFIG, {
           {
             loader: 'css-loader',
             options: {
-              modules: {
-                mode: 'local',
-                localIdentName: '[name]__[local]--[hash:base64:5]'
-              },
+              modules: CSS_MODULES
+                ? {
+                    mode: 'local',
+                    localIdentName: '[name]__[local]--[hash:base64:5]'
+                  }
+                : false,
               importLoaders: 1
             }
           },
@@ -64,6 +73,10 @@ module.exports = merge(BASE_CONFIG, {
             }
           }
         ]
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/,
+        use: 'file-loader'
       }
     ]
   },
@@ -87,6 +100,8 @@ module.exports = merge(BASE_CONFIG, {
   devServer: {
     hot: true,
     compress: true,
+    host: DEV_HOST,
+    port: DEV_PORT,
     // publicPath: '/assets/js/',
     contentBase: './dist/'
   },
