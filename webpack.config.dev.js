@@ -13,9 +13,6 @@ const {
   CSS_MODULES
 } = require('./config')
 
-console.log(CSS_MODULES)
-console.log(CSS_MODULES ? 'true' : 'false')
-
 module.exports = merge(BASE_CONFIG, {
   mode: 'development',
   entry: ENTRY,

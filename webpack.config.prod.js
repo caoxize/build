@@ -60,6 +60,18 @@ module.exports = merge(BASE_CONFIG, {
       }
     ]
   },
+  optimization: {
+    splitChunks: {
+      minSize: 0,
+      cacheGroups: {
+        vendors: {
+          name: 'vendors',
+          chunks: 'all',
+          minChunks: 2
+        }
+      }
+    }
+  },
   plugins: [
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
@@ -73,7 +85,7 @@ module.exports = merge(BASE_CONFIG, {
       return new HtmlWebpackPlugin({
         template: path.join(PROJECT_PATH, `public/${item}.html`),
         filename: `${item}.html`,
-        chunks: [item],
+        chunks: [item, 'vendors'],
         inject: true,
         minify: {
           html5: true,

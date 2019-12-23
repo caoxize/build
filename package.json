@@ -1,11 +1,10 @@
 {
   "name": "react-webpack-build",
-  "version": "0.0.1-beta5",
+  "version": "0.0.1-beta6",
   "description": "react webpack build",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack-dev-server --open chrome --config ./webpack.config.dev.js",
+    "dev": "webpack-dev-server --open --config ./webpack.config.dev.js",
     "build": "webpack --config webpack.config.prod.js"
   },
   "repository": {
@@ -25,7 +24,8 @@
   },
   "homepage": "https://github.com/caoxize/build#readme",
   "ENTRY": {
-    "index": "./src/index.js"
+    "index": "./src/index.js",
+    "search": "./src/search.js"
   },
   "dependencies": {
     "@babel/core": "^7.7.4",
