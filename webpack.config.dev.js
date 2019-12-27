@@ -1,21 +1,13 @@
-const path = require('path')
+// const fs = require('fs')
 const webpack = require('webpack')
 const merge = require('webpack-merge')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 const BASE_CONFIG = require('./webpack.config.base')
 
-const {
-  ENTRY,
-  PROJECT_PATH,
-  DEV_HOST,
-  DEV_PORT,
-  CSS_MODULES
-} = require('./config')
+const { DEV_HOST, DEV_PORT, CSS_MODULES } = require('./config')
 
 module.exports = merge(BASE_CONFIG, {
   mode: 'development',
-  entry: ENTRY,
   output: {
     filename: '[name].bundle.js'
   },
@@ -49,7 +41,7 @@ module.exports = merge(BASE_CONFIG, {
             options: {
               modules: CSS_MODULES
                 ? {
-                    mode: 'local',
+                    mode: CSS_MODULES,
                     localIdentName: '[name]__[local]--[hash:base64:5]'
                   }
                 : false,
@@ -77,25 +69,7 @@ module.exports = merge(BASE_CONFIG, {
       }
     ]
   },
-  plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    ...Object.keys(ENTRY).map(item => {
-      return new HtmlWebpackPlugin({
-        template: path.join(PROJECT_PATH, `public/${item}.html`),
-        filename: `${item}.html`,
-        chunks: [item],
-        inject: true,
-        minify: {
-          html5: true,
-          collapseWhitespace: true,
-          preserveLineBreaks: false,
-          minifyCSS: true,
-          minifyJS: true,
-          removeComments: false
-        }
-      })
-    })
-  ],
+  plugins: [new webpack.HotModuleReplacementPlugin()],
   devServer: {
     hot: true,
     compress: true,
@@ -103,6 +77,11 @@ module.exports = merge(BASE_CONFIG, {
     port: DEV_PORT,
     // publicPath: '/assets/js/',
     contentBase: './dist/'
+    // https: {
+    //   key: fs.readFileSync(path.resolve(PROJECT_PATH, 'cert', 'server.key')),
+    //   cert: fs.readFileSync(path.resolve(PROJECT_PATH, 'cert', 'server.crt')),
+    //   ca: fs.readFileSync(path.resolve(PROJECT_PATH, 'cert', 'rootCA.pem'))
+    // }
   },
   devtool: 'cheap-module-eval-source-map'
 })

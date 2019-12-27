@@ -1,6 +1,6 @@
 {
   "name": "react-webpack-build",
-  "version": "0.0.1-beta6",
+  "version": "0.0.1-beta7",
   "description": "react webpack build",
   "main": "index.js",
   "scripts": {
@@ -23,10 +23,7 @@
     "url": "https://github.com/caoxize/build/issues"
   },
   "homepage": "https://github.com/caoxize/build#readme",
-  "ENTRY": {
-    "index": "./src/index.js",
-    "search": "./src/search.js"
-  },
+  "CSS_MODULES": "local",
   "dependencies": {
     "@babel/core": "^7.7.4",
     "@babel/preset-env": "^7.7.4",
@@ -38,6 +35,7 @@
     "css-loader": "^3.2.1",
     "cssnano": "^4.1.10",
     "file-loader": "^5.0.2",
+    "glob": "^7.1.6",
     "html-webpack-plugin": "^3.2.0",
     "mini-css-extract-plugin": "^0.8.0",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
@@ -79,7 +77,6 @@
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.17.0",
     "eslint-plugin-react-hooks": "^1.7.0",
-    "path": "^0.12.7",
     "stylelint": "^12.0.0",
     "stylelint-config-standard": "^19.0.0",
     "stylelint-webpack-plugin": "^1.1.2",
